@@ -1,0 +1,60 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ai_ollama
+    ports:
+      - "127.0.0.1:11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - ai_isolated_net
+    restart: always
+
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: ai_chromadb
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ANONYMIZED_TELEMETRY=FALSE
+    networks:
+      - ai_isolated_net
+    restart: always
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: ai_postgres
+    ports:
+      - "127.0.0.1:5433:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./database/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+    networks:
+      - ai_isolated_net
+    restart: always
+
+  redis:
+    image: redis:7-alpine
+    container_name: ai_redis
+    ports:
+      - "127.0.0.1:6379:6379"
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    networks:
+      - ai_isolated_net
+    restart: always
+
+networks:
+  ai_isolated_net:
+    driver: bridge
+
+volumes:
+  ollama_data:
+  chroma_data:
+  pg_data:

@@ -1,0 +1,15 @@
+kreuzberg
+langchain
+langchain-community
+langchain-text-splitters
+chromadb
+pypdf
+docx2txt
+psycopg2-binary
+redis
+requests
+python-dotenv
+ollama
+pandas
+streamlit
+
