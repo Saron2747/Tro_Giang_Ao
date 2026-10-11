@@ -1,0 +1,63 @@
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+secrets*.json
+.streamlit/secrets.toml
+.aws/
+.ssh/
+.codex/
+.agents/
+
+# Python environments, caches and build artifacts
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+build/
+dist/
+
+# Local documents, databases, uploads and generated outputs
+/knowledge_storage/
+/temp_uploads/
+/output/
+/tmp/
+/tests/
+/docs/
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.dump
+*.backup
+*.bak
+*.log
+
+# Contains local credentials and personal identifiers
+/seed_users.py
+
+# Auxiliary diagrams are not needed to run the app
+/So_do_LLM/
+/create_process_diagram.py
+/make_diagram.py
+
+# Editor and operating system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+~$*
